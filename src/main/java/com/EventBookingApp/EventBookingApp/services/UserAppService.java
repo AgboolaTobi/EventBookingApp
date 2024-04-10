@@ -8,8 +8,7 @@ import com.EventBookingApp.EventBookingApp.exceptions.RegistrationException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.EventBookingApp.EventBookingApp.utils.Validation.verifyEmail;
-import static com.EventBookingApp.EventBookingApp.utils.Validation.verifyPassword;
+import static com.EventBookingApp.EventBookingApp.utils.Validation.*;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +20,7 @@ public class UserAppService implements UserService{
     public UserRegistrationResponse register(UserRegistrationRequest request) throws RegistrationException {
         boolean isRegistered = userRepository.findByEmail(request.getEmail()) !=null;
         if (isRegistered) throw new RegistrationException("Invalid registration details");
+        if (!verifyName(request.getName())) throw new RegistrationException("Invalid registration format");
         if (!verifyEmail(request.getEmail())) throw new RegistrationException("Invalid email format");
         if (!verifyPassword(request.getPassword())) throw new RegistrationException("Invalid password format");
         User user = new User();

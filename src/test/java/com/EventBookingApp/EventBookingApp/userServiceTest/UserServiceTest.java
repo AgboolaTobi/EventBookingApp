@@ -26,8 +26,8 @@ public class UserServiceTest {
     @Test
     public void userRegistrationTest() throws RegistrationException {
         UserRegistrationRequest request = new UserRegistrationRequest();
-        request.setName("Tobi");
-        request.setEmail("tobi4tee@gmail.com");
+        request.setName("TobiionResponseTobiionResponseTobiionResponseTobiionResponsevTobiionResponseTobiionResponseTobiionResponseTobiionResponsevTobiionResponseTobiionResponse");
+        request.setEmail("tobi99@gmail.com");
         request.setPassword("Agboola04@");
 
         UserRegistrationResponse response = userService.register(request);
