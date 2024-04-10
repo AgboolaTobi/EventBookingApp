@@ -4,6 +4,7 @@ package com.EventBookingApp.EventBookingApp.userServiceTest;
 import com.EventBookingApp.EventBookingApp.data.repositories.UserRepository;
 import com.EventBookingApp.EventBookingApp.dtos.requests.UserRegistrationRequest;
 import com.EventBookingApp.EventBookingApp.dtos.responses.UserRegistrationResponse;
+import com.EventBookingApp.EventBookingApp.exceptions.RegistrationException;
 import com.EventBookingApp.EventBookingApp.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,11 @@ public class UserServiceTest {
 
 
     @Test
-    public void userRegistrationTest(){
+    public void userRegistrationTest() throws RegistrationException {
         UserRegistrationRequest request = new UserRegistrationRequest();
         request.setName("Tobi");
         request.setEmail("tobi4tee@gmail.com");
-        request.setPassword("1212");
+        request.setPassword("Agboola04@");
 
         UserRegistrationResponse response = userService.register(request);
         assertThat(response).isNotNull();
@@ -35,11 +36,11 @@ public class UserServiceTest {
     }
 
     @Test
-    public void userRegistrationTest2(){
+    public void userRegistrationTest2() throws RegistrationException {
         UserRegistrationRequest request = new UserRegistrationRequest();
         request.setName("Tobi");
-        request.setEmail("tobi4tee@gmail.com");
-        request.setPassword("1212");
+        request.setEmail("tobi4tee2@gmail.com");
+        request.setPassword("Agboola04@");
 
         UserRegistrationResponse response = userService.register(request);
         assertEquals(2,userRepository.count());
