@@ -1,27 +1,40 @@
 package com.EventBookingApp.EventBookingApp.data.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Setter
 @Getter
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private LocalDateTime CreatedAt = LocalDateTime.now();
-    private int availableAttendees;
+    private String name;
+    @JsonIgnore
+    private LocalDate eventDate;
+    private int numberOfAttendees;
     private String description;
-    private EventCategory category;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Enumerated(EnumType.STRING)
+    private EventCategory eventCategory;
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "name='" + name + '\'' +
+                ", dateTime=" + eventDate +
+                ", attendees=" + numberOfAttendees +
+                ", description='" + description + '\'' +
+                ", category=" + eventCategory +
+                '}';
+    }
 
 }
