@@ -1,7 +1,6 @@
 package com.EventBookingApp.EventBookingApp.data.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +14,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Event {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private LocalDateTime date = LocalDateTime.now();
+    private LocalDateTime CreatedAt = LocalDateTime.now();
     private int availableAttendees;
+    private String description;
+    private EventCategory category;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private User user;
 
 }

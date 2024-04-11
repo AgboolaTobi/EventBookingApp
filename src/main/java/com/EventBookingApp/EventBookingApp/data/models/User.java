@@ -1,12 +1,13 @@
 package com.EventBookingApp.EventBookingApp.data.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Getter
@@ -15,11 +16,10 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String email;
     private String password;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    private Event event;
+    
 }
