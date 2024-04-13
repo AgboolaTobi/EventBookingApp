@@ -6,5 +6,5 @@ import com.EventBookingApp.EventBookingApp.exceptions.EventAppException;
 
 public interface EventService {
 
-    EventCreationResponse createEvent(EventCreationRequest request, Long userId) throws EventAppException;
+    EventCreationResponse createEvent(EventCreationRequest request) throws EventAppException;
 }

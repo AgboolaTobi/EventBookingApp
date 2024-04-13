@@ -9,5 +9,5 @@ import lombok.ToString;
 @Getter
 @ToString
 public class EventCreationResponse {
-    private Long id;
+    private String message;
 }

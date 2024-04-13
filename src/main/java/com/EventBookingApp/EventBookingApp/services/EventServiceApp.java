@@ -10,45 +10,58 @@ import com.EventBookingApp.EventBookingApp.exceptions.EventAppException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Service
 @AllArgsConstructor
 public class EventServiceApp implements EventService{
 
-    private final EventService eventService;
-    private final UserService userService;
+
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
 
 
 
     @Override
-    public EventCreationResponse createEvent(EventCreationRequest request, Long userId) throws EventAppException {
-        User user = userRepository.findByUserId(userId);
-        if (user== null) throw new EventAppException("User not found");
-        Event newEvent = new Event();
-        if (request.getName().isEmpty() || request.getName().length() > 100) throw new EventAppException("Event name cannot be less than 1 nor greater than 100 characters");
-        newEvent.setName(request.getName());
-        if (request.getDescription().isEmpty() || request.getDescription().length() > 500) throw new EventAppException("Event description cannot be less than 1 character nor greater than 500 character");
+    public EventCreationResponse createEvent(EventCreationRequest request) throws EventAppException {
 
-        newEvent.setDescription(request.getDescription());
-        if (request.getNumberOfAttendees() < 0 || request.getNumberOfAttendees() > 1000) throw new EventAppException("Number of attendees cannot be less 1 nor greater than 1000");
-        newEvent.setNumberOfAttendees(request.getNumberOfAttendees());
+        User user = userRepository.findByEmail(request.getEmail());
+        UserExist(user);
+        Event event = new Event();
+        validateName(request);
+        event.setName(request.getName());
+        validateDescription(request);
+        event.setDescription(request.getDescription());
+        validateAttendeesNumber(request);
+        event.setNumberOfAttendees(request.getNumberOfAttendees());
 
-        newEvent.setEventCategory(request.getCategory());
+        event.setEventCategory(request.getCategory());
+        event.setEventDate(request.getEventDate());
+        event.setUser(user);
 
-        LocalDateTime date = LocalDateTime.of(2024,12,16,12,0,0);
-        newEvent.setEventDate(LocalDate.from(date));
-//        newEvent.setUser(user);
-        eventRepository.save(newEvent);
-        userRepository.save(user);
+        Event saveEvent = eventRepository.save(event);
+//        userRepository.save(user);
+        eventRepository.save(saveEvent);
+
 
         EventCreationResponse response = new EventCreationResponse();
-        response.setId(newEvent.getId());
+        response.setMessage("Event successfully created");
 
         return response;
 
+    }
+
+    private static void validateAttendeesNumber(EventCreationRequest request) throws EventAppException {
+        if (request.getNumberOfAttendees() < 0 || request.getNumberOfAttendees() > 1000) throw new EventAppException("Number of attendees cannot be less 1 nor greater than 1000");
+    }
+
+    private static void validateDescription(EventCreationRequest request) throws EventAppException {
+        if (request.getDescription().isEmpty() || request.getDescription().length() > 500) throw new EventAppException("Event description cannot be less than 1 character nor greater than 500 character");
+    }
+
+    private static void validateName(EventCreationRequest request) throws EventAppException {
+        if (request.getName().isEmpty() || request.getName().length() > 100) throw new EventAppException("Event name cannot be less than 1 nor greater than 100 characters");
+    }
+
+    private static void UserExist(User user) throws EventAppException {
+        if (user == null) throw new EventAppException("User not found");
     }
 }
