@@ -44,12 +44,12 @@ public class EventServiceTest {
     @Test
     public void userCreatingMultipleEvents() throws EventAppException {
         EventCreationRequest request = new EventCreationRequest();
-        request.setEmail("tobi099@gmail.com");
-        request.setName("Hackathon");
-        request.setDescription("A tech conference");
+        request.setEmail("avia@gmail.com");
+        request.setName("Worship of God");
+        request.setDescription("A christian meeting. Teaching of the word in the spirit");
         request.setCategory(EventCategory.CONCERT);
         request.setNumberOfAttendees(700);
-        request.setEventDate("2025/12/16/12/00/00");
+        request.setEventDate("20/08/2024");
 
         EventCreationResponse response = eventService.createEvent(request);
 
