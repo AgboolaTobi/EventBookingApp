@@ -37,13 +37,14 @@ public class UserServiceTest {
     }
 
     @Test
-    public void userRegistrationTest2() throws EventAppException {
+    public void testThatMoreThanOneUserCanRegister() throws EventAppException {
         UserRegistrationRequest request = new UserRegistrationRequest();
         request.setName("Tobi");
         request.setEmail("tobi4tee2@gmail.com");
         request.setPassword("Agboola04@");
 
         UserRegistrationResponse response = userService.register(request);
+        assertThat(response).isNotNull();
         assertEquals(2,userRepository.count());
 
     }

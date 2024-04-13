@@ -27,11 +27,11 @@ public class EventServiceTest {
     public void EventCreationTest() throws EventAppException {
         EventCreationRequest request = new EventCreationRequest();
         request.setEmail("tobi099@gmail.com");
-        request.setName("Hackathon");
-        request.setDescription("A tech conference");
+        request.setName("The Future of Tech");
+        request.setDescription("A tech conference...");
         request.setCategory(EventCategory.CONFERENCE);
         request.setNumberOfAttendees(250);
-        request.setEventDate("2024,12,16,12,00,00");
+        request.setEventDate("2024/12/16/12");
 
         EventCreationResponse response = eventService.createEvent(request);
 
