@@ -9,5 +9,6 @@ import lombok.Setter;
 public class TicketCancellingRequest {
     private String email;
     private String eventName;
+    private Long eventId;
     private ReservationStatus status;
 }

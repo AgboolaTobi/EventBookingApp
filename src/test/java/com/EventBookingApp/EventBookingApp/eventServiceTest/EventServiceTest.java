@@ -26,7 +26,7 @@ public class EventServiceTest {
     @Test
     public void EventCreationTest() throws EventAppException {
         EventCreationRequest request = new EventCreationRequest();
-        request.setEmail("tobi099@gmail.com");
+        request.setEmail("tobi4tee@gmail.com");
         request.setName("The Future of Tech");
         request.setDescription("A tech conference...");
         request.setCategory(EventCategory.CONFERENCE);
@@ -44,7 +44,7 @@ public class EventServiceTest {
     @Test
     public void userCreatingMultipleEvents() throws EventAppException {
         EventCreationRequest request = new EventCreationRequest();
-        request.setEmail("avia@gmail.com");
+        request.setEmail("tobi4tee@gmail.com");
         request.setName("Worship of God");
         request.setDescription("A christian meeting. Teaching of the word in the spirit");
         request.setCategory(EventCategory.CONCERT);

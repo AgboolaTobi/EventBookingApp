@@ -28,7 +28,7 @@ public class UserServiceTest {
     public void userRegistrationTest() throws EventAppException {
         UserRegistrationRequest request = new UserRegistrationRequest();
         request.setName("Tobi");
-        request.setEmail("tobi099@gmail.com");
+        request.setEmail("tobi4tee@gmail.com");
         request.setPassword("Agboola.");
 
         UserRegistrationResponse response = userService.register(request);
@@ -41,11 +41,24 @@ public class UserServiceTest {
         UserRegistrationRequest request = new UserRegistrationRequest();
         request.setName("Avia");
         request.setEmail("avia@gmail.com");
-        request.setPassword("Agboola04@");
+        request.setPassword("Aviaa04@");
 
         UserRegistrationResponse response = userService.register(request);
         assertThat(response).isNotNull();
         assertEquals(2,userRepository.count());
+
+    }
+
+    @Test
+    public void testThatMoreThanOneUserCanRegister2() throws EventAppException {
+        UserRegistrationRequest request = new UserRegistrationRequest();
+        request.setName("Charis");
+        request.setEmail("charis@gmail.com");
+        request.setPassword("Charis04@");
+
+        UserRegistrationResponse response = userService.register(request);
+        assertThat(response).isNotNull();
+        assertEquals(3,userRepository.count());
 
     }
 
@@ -60,7 +73,7 @@ public class UserServiceTest {
     public void testThatIfAAttemptsToRegisterWithExistingEmailAddressExceptionIsThrown(){
         UserRegistrationRequest request = new UserRegistrationRequest();
         request.setName("Toby");
-        request.setEmail("tobi099@gmail.com");
+        request.setEmail("tobi4tee@gmail.com");
         request.setPassword("Agboola.");
         assertThrows(EventAppException.class,()->userService.register(request));
     }
@@ -74,10 +87,6 @@ public class UserServiceTest {
         request.setPassword("pass");
         assertThrows(EventAppException.class,()->userService.register(request));
     }
-
-
-
-
 
 
 }
