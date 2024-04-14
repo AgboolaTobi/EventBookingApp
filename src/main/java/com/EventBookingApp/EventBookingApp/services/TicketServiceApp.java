@@ -3,11 +3,12 @@ package com.EventBookingApp.EventBookingApp.services;
 import com.EventBookingApp.EventBookingApp.data.models.Event;
 import com.EventBookingApp.EventBookingApp.data.models.Ticket;
 import com.EventBookingApp.EventBookingApp.data.models.User;
-import com.EventBookingApp.EventBookingApp.data.repositories.EventRepository;
 import com.EventBookingApp.EventBookingApp.data.repositories.TicketRepository;
 import com.EventBookingApp.EventBookingApp.data.repositories.UserRepository;
 import com.EventBookingApp.EventBookingApp.dtos.requests.TicketBookingRequest;
+import com.EventBookingApp.EventBookingApp.dtos.requests.TicketCancellingRequest;
 import com.EventBookingApp.EventBookingApp.dtos.responses.TicketBookingResponse;
+import com.EventBookingApp.EventBookingApp.dtos.responses.TicketCancellingResponse;
 import com.EventBookingApp.EventBookingApp.exceptions.EventAppException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,21 @@ public class TicketServiceApp implements TicketService{
         response.setMessage("You have successfully booked " + request.getNumberOfTickets() + " for" + request.getNameOnTicket());
         return response;
 
+    }
+
+    @Override
+    public TicketCancellingResponse cancelTicket(TicketCancellingRequest request) throws EventAppException {
+        User user = userRepository.findByEmail(request.getEmail());
+        UserExist(user);
+        Ticket ticket = ticketRepository.findByEventName(request.getEventName());
+        ticket.setId(ticket.getId());
+        ticket.setEventName(request.getEventName());
+        ticketRepository.delete(ticket);
+        userRepository.save(user);
+
+        TicketCancellingResponse response = new TicketCancellingResponse();
+
+        response.setMessage("Dear " + ticket.getNameOnTicket() + " you have successfully cancelled your tickets for " + ticket.getEventName() + " event");
+        return response;
     }
 }

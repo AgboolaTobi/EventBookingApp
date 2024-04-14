@@ -2,7 +2,6 @@ package com.EventBookingApp.EventBookingApp.utils;
 
 import com.EventBookingApp.EventBookingApp.data.models.User;
 import com.EventBookingApp.EventBookingApp.dtos.requests.EventCreationRequest;
-import com.EventBookingApp.EventBookingApp.dtos.requests.TicketBookingRequest;
 import com.EventBookingApp.EventBookingApp.exceptions.EventAppException;
 
 public class Validation {
